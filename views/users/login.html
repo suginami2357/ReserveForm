@@ -1,0 +1,31 @@
+{{ template "header" .}}
+
+{{ if .Alert }} 
+  <div class="alert alert-{{ .Alert.Type }}" role="alert" style="font-size:80%">
+{{ .Alert.Message }}
+  </div>
+{{ end }}
+
+<form action="/users/login" method="POST">
+  {{ if .Email }} 
+    <div class="form-group">
+      <input type="email" id="email" name="email" class="form-control" placeholder="メールアドレスを入力してください。" required value="{{ .Email }}">
+    </div>
+    <div class="form-group">
+      <input type="password" id="password" name="password" class="form-control" placeholder="パスワードを入力してください。"     required autofocus>
+    </div>  
+  {{else}}
+    <div class="form-group">
+      <input type="email" id="email" name="email" class="form-control" placeholder="メールアドレスを入力してください。" required autofocus>
+    </div>
+    <div class="form-group">
+      <input type="password" id="password" name="password" class="form-control" placeholder="パスワードを入力してください。"     required>
+    </div>
+  {{ end }}
+  <div class="form-check">
+    <label><input type="checkbox" name="remember_me"> 次回から自動でログインする</label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-signin" type="submit"  id="create">ログイン</button>
+</form>
+
+{{ template "footer" .}}

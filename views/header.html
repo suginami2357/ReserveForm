@@ -1,0 +1,19 @@
+{{ define "header" }}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <title>予約サイト</title>
+    <meta name="viewport" content="width=device-width">
+    <script src="../resources/javascripts/jquery-3.6.0.min.js"></script>
+    <script src="../resources/javascripts/bootstrap.bundle.min.js"></script>
+    {{ template "javascript" .}}
+    <link rel="stylesheet" href="../resources/stylesheets/bootstrap.min.css">
+    {{ template "stylesheet" .}}
+  </head>
+  <header>
+    {{ template "navbar" .}}
+  </header>
+  <body>
+    <div id="container" class="container">
+      {{ end }}

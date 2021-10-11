@@ -1,0 +1,20 @@
+{{ template "header" .}}
+  <form id="confirm_form" action="/reserves/create" method="POST">
+    <div class="form-group">
+        <label for="today">予約日</label>
+        <p><input type="date" id="today" name="date" class="today" required></input></p>
+
+        <label for="place">内容 <span class="badge badge-danger">必須</span></label>
+        <p>
+          <select id="place" name="PlaceID" required>
+          <option value=""></option>
+          {{range .}}
+            <option value="{{ .ID }}">{{ .Name }}</option>
+          {{end}}
+        </select>
+      </p>
+
+      <p><button id="confirm_button" class="btn btn-lg btn-primary" type="button">予約</button></p>
+    </div>
+  </form>
+{{ template "footer" .}}
