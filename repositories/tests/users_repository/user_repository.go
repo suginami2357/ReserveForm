@@ -11,6 +11,7 @@ type Repository struct {
 var Data = []users.User{}
 
 func (Repository) Create(user users.User) (*users.User, error) {
+	user.ID = uint(len(Data)) + 1
 	Data = append(Data, user)
 	return &user, nil
 }
@@ -35,13 +36,13 @@ func (Repository) Take(src users.User) (*users.User, error) {
 			}
 		}
 	}
-	return nil, errors.New("search parameters is not applicable")
+	return &users.User{}, errors.New("user not found")
 }
 
 func (Repository) Update(user users.User) {
-	for _, v := range Data {
+	for i, v := range Data {
 		if user.ID == v.ID {
-			v = user
+			Data[i] = user
 		}
 	}
 }

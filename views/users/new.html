@@ -2,11 +2,11 @@
 
 {{ if .Alert }} 
   <div class="alert alert-{{ .Alert.Type }}" role="alert" style="font-size:80%">
-{{ .Alert.Message }}
+    <label id="alert">{{ .Alert.Message }}</label>
   </div>
 {{ end }}
 
-<form action="/users/login" method="POST">
+<form action="/users/new" method="POST">
   {{ if .Email }} 
     <div class="form-group">
       <input type="email" id="email" name="email"class="form-control" placeholder="メールアドレスを入力してください。" required value="{{ .Email }}">
@@ -23,9 +23,9 @@
     </div>
   {{ end }}
   <div class="form-check">
-    <label><input type="checkbox" name="remember_me"> 次回から自動でログインする</label>
+    <label><input type="checkbox" id="remember_me"  name="remember_me"> 次回から自動でログインする</label>
   </div>
-  <button class="btn btn-lg btn-primary btn-signin" type="submit" id="create">新規登録</button>
+  <button class="btn btn-lg btn-primary btn-signin" type="submit" id="submit">新規登録</button>
 </form>
 
 {{ template "footer" .}}

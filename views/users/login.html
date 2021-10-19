@@ -2,7 +2,7 @@
 
 {{ if .Alert }} 
   <div class="alert alert-{{ .Alert.Type }}" role="alert" style="font-size:80%">
-{{ .Alert.Message }}
+    <label id="alert">{{ .Alert.Message }}</label>
   </div>
 {{ end }}
 
@@ -23,9 +23,9 @@
     </div>
   {{ end }}
   <div class="form-check">
-    <label><input type="checkbox" name="remember_me"> 次回から自動でログインする</label>
+    <label><input type="checkbox" id="remember_me" name="remember_me"> 次回から自動でログインする</label>
   </div>
-  <button class="btn btn-lg btn-primary btn-signin" type="submit"  id="create">ログイン</button>
+  <button class="btn btn-lg btn-primary btn-signin" type="submit" id="submit">ログイン</button>
 </form>
 
 {{ template "footer" .}}

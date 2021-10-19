@@ -39,7 +39,7 @@ func Logout(w http.ResponseWriter, r *http.Request, t injections.Type) {
 	ses.Values[TOKEN] = nil
 	ses.Save(r, w)
 
-	user, _ := repositories.User(t).Take(*users.New_id(id))
+	user, _ := repositories.User(t).Take(*users.Generate(id))
 	user.Token = nil
 	repositories.User(t).Update(*user)
 }
@@ -55,7 +55,7 @@ func User(r *http.Request, t injections.Type) (*users.User, error) {
 		return nil, err
 	}
 
-	user, err := repositories.User(t).Take(*users.New_id(id))
+	user, err := repositories.User(t).Take(*users.Generate(id))
 	if err != nil {
 		return nil, err
 	}

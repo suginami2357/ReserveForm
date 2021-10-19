@@ -18,7 +18,7 @@ type User struct {
 	Alert    alerts.Alert
 }
 
-func New_id(id uint) *User {
+func Generate(id uint) *User {
 	user := User{}
 	user.ID = id
 	return &user

@@ -28,8 +28,9 @@ func (db DataBase) New(w http.ResponseWriter, r *http.Request) {
 			Show(w, r, db.Type, "users/new", user)
 			return
 		}
-
 		password := r.PostFormValue("password")
+
+		//ユーザー入力情報の正当性確認
 		user, err := users.New(email, password)
 		if err != nil {
 			alert := alerts.New(alerts.Danger, err.Error())
@@ -69,7 +70,7 @@ func (db DataBase) Login(w http.ResponseWriter, r *http.Request) {
 		email := r.PostFormValue("email")
 		user, err := repositories.User(db.Type).Take(users.User{Email: email})
 		if err != nil {
-			alert := alerts.New(alerts.Danger, "メールアドレスまたはパスワードが等しくありません。")
+			alert := alerts.New(alerts.Danger, "メールアドレスまたはパスワードが違います。")
 			vm := users.User{Email: email, Alert: alert}
 			Show(w, r, db.Type, "users/login", vm)
 			return
@@ -78,7 +79,7 @@ func (db DataBase) Login(w http.ResponseWriter, r *http.Request) {
 		//ログイン認証
 		password := r.PostFormValue("password")
 		if err := bcrypt.CompareHashAndPassword(user.Password, []byte(password)); err != nil {
-			alert := alerts.New(alerts.Danger, "メールアドレスまたはパスワードが等しくありません。")
+			alert := alerts.New(alerts.Danger, "メールアドレスまたはパスワードが違います。")
 			vm := users.User{Email: email, Alert: alert}
 			Show(w, r, db.Type, "users/login", vm)
 			return
@@ -94,6 +95,9 @@ func (db DataBase) Login(w http.ResponseWriter, r *http.Request) {
 }
 
 func (db DataBase) Logout(w http.ResponseWriter, r *http.Request) {
-	Logout(w, r, db.Type)
-	http.Redirect(w, r, "/users/login", http.StatusFound)
+	switch r.Method {
+	case "GET":
+		Logout(w, r, db.Type)
+		http.Redirect(w, r, "/users/login", http.StatusFound)
+	}
 }
