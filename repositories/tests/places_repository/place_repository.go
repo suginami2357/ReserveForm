@@ -2,15 +2,17 @@ package places_repository
 
 import (
 	"ReserveForm/models/places"
+
+	"gorm.io/gorm"
 )
 
 type Repository struct {
 }
 
 func (Repository) Index() []places.Place {
-	var places []places.Place
-	// db, _ := gorm.Open("sqlite3", "data.sqlite3")
-	// db.Find(&places)
-	// defer db.Close()
-	return places
+	return []places.Place{
+		places.Place{Model: gorm.Model{ID: 1}, Name: "テスト1"},
+		places.Place{Model: gorm.Model{ID: 2}, Name: "テスト2"},
+		places.Place{Model: gorm.Model{ID: 3}, Name: "テスト3"},
+	}
 }

@@ -40,7 +40,6 @@ func Start(t injections.Type) {
 
 	router.HandleFunc("/reserves", rc.Index)
 	router.HandleFunc("/reserves/new", rc.New)
-	router.HandleFunc("/reserves/create", rc.Create)
 	router.HandleFunc("/reserves/{id}/delete", rc.Delete)
 
 	log.Fatal(http.ListenAndServe(":8000", router))

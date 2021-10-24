@@ -32,7 +32,7 @@ func (db DataBase) Index(w http.ResponseWriter, r *http.Request) {
 
 func (db DataBase) New(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
-	case "Get":
+	case "GET":
 		_, err := users_controller.User(r, db.Type)
 		if err != nil {
 			http.Redirect(w, r, "/users/new", http.StatusFound)

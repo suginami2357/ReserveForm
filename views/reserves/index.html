@@ -1,24 +1,22 @@
 {{ template "header" .}}
-      <form id="confirm_form" method="POST">
-        <table class="table">
-            <thead>
-              <tr>
-                  <th scope="col">予約日</th>
-                  <th scope="col">内容</th>
-                  <th scope="col"></th>
-              </tr>
-            <thead>
-            <tbody>
-              {{range .}}
-                <tr>
-                    <td>{{ .Format_MMDD }}</td>
-                    <td>{{ .PlaceName }}</td>
-                    <td>
-                      <button id="/reserves/{{ .ID }}/delete" name="confirm_button" class="btn btn-primary" type="button">取消</button>
-                    </td>
-                </tr>
-              {{ end }}
-            </tbody>          　
-        </table>
-      </form>
+  <form id="confirm-form" method="POST">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">予約日</th>
+          <th scope="col">内容</th>
+          <th scope="col"></th>
+        </tr>
+      <thead>
+      <tbody>
+        {{range .}}
+          <tr>
+            <td>{{ .Format_MMDD }}</td>
+            <td>{{ .PlaceName }}</td>
+            <td><button id="{{ .ID }}" name="confirm-button" class="btn btn-primary" type="button">取消</button></td>
+          </tr>
+        {{ end }}
+      </tbody>　
+    </table>
+  </form>
 {{ template "footer" .}}
