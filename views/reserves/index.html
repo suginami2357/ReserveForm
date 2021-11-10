@@ -1,5 +1,5 @@
 {{ template "header" .}}
-  <form id="confirm-form" method="POST">
+  <form id="form" name="form" method="POST">
     <table class="table">
       <thead>
         <tr>
@@ -12,8 +12,8 @@
         {{range .}}
           <tr>
             <td>{{ .Format_MMDD }}</td>
-            <td>{{ .PlaceName }}</td>
-            <td><button id="{{ .ID }}" name="confirm-button" class="btn btn-primary" type="button">取消</button></td>
+            <td>{{ .ContentName }}</td>
+            <td><button id="{{ .ID }}" name="button" class="btn btn-primary" type="button">取消</button></td>
           </tr>
         {{ end }}
       </tbody>　

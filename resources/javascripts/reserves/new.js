@@ -1,14 +1,20 @@
 window.addEventListener('DOMContentLoaded', ()=> {
-  var date = new Date();
-  var yyyy = date.getFullYear();
-  var mm = ("0"+(date.getMonth()+1)).slice(-2);
-  var dd = ("0"+date.getDate()).slice(-2);
-  document.getElementById("today").value = yyyy + '-' + mm + '-' + dd;
+  let d = new Date();
+  let yyyy = d.getFullYear();
+  let mm = ("0" + (d.getMonth() + 1)).slice(-2);
+  let dd = ("0" + d.getDate()).slice(-2);
+  form.date.value = yyyy + '-' + mm + '-' + dd;
   
-  document.getElementById("confirm_button").addEventListener('click', () =>{
-    if (confirm('予約を確定しますか？')) {
-      document.getElementById("confirm_form").submit();
-    }}
-  )
+  form.button.addEventListener('click', function() { 
+    if(form.PlaceID.value == ""){
+        alert("内容を選択してください。")
+        return;
+      }
+
+    if (!confirm('予約を確定しますか？')) {
+      return
+    } 
+    form.submit();
+  });
 });
 

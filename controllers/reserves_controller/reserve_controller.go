@@ -38,12 +38,12 @@ func (db DataBase) New(w http.ResponseWriter, r *http.Request) {
 			http.Redirect(w, r, "/users/new", http.StatusFound)
 			return
 		}
-		places := repositories.Place(db.Type).Index()
+		places := repositories.Content(db.Type).Index()
 		users_controller.Show(w, r, db.Type, "reserves/new", places)
 
 	case "POST":
 		date := r.PostFormValue("date")
-		place, er := strconv.ParseUint(r.FormValue("PlaceID"), 10, 64)
+		content, er := strconv.ParseUint(r.FormValue("ContentID"), 10, 64)
 		if er != nil {
 			http.Redirect(w, r, "/reserves/new", http.StatusFound)
 			return
@@ -55,9 +55,9 @@ func (db DataBase) New(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		reserve := reserves.Reserve{
-			UserID:  user.ID,
-			PlaceID: uint(place),
-			Date:    date,
+			UserID:    user.ID,
+			ContentID: uint(content),
+			Date:      date,
 		}
 		repositories.Reserve(db.Type).Create(reserve)
 		http.Redirect(w, r, "/reserves", http.StatusFound)

@@ -30,7 +30,7 @@ func (Repository) Index(user users.User) []reserves.Reserve {
 
 	var results []reserves.Reserve
 	for _, v := range table {
-		reserve := reserves.Reserve{Model: gorm.Model{ID: v.ID}, PlaceName: v.Name, Date: v.Date}
+		reserve := reserves.Reserve{Model: gorm.Model{ID: v.ID}, ContentName: v.Name, Date: v.Date}
 		results = append(results, reserve)
 	}
 	return results

@@ -1,13 +1,15 @@
 package injections
 
 import (
-	"ReserveForm/models/places"
+	"ReserveForm/models/contents"
 	"ReserveForm/models/reserves"
 	"ReserveForm/models/users"
-	sqlite_places "ReserveForm/repositories/sqlites/places_repository"
+
+	sqlite_contents "ReserveForm/repositories/sqlites/contents_repository"
 	sqlite_reserves "ReserveForm/repositories/sqlites/reserves_repository"
 	sqlite_users "ReserveForm/repositories/sqlites/users_repository"
-	test_places "ReserveForm/repositories/tests/places_repository"
+
+	test_contents "ReserveForm/repositories/tests/contents_repository"
 	test_reserves "ReserveForm/repositories/tests/reserves_repository"
 	test_users "ReserveForm/repositories/tests/users_repository"
 )
@@ -41,12 +43,12 @@ func Reserve(t Type) reserves.Repository {
 	}
 }
 
-func Place(t Type) places.Repository {
+func Place(t Type) contents.Repository {
 	switch t {
 	case Sqlite:
-		return new(sqlite_places.Repository)
+		return new(sqlite_contents.Repository)
 	case Test:
-		return new(test_places.Repository)
+		return new(test_contents.Repository)
 	default:
 		panic("argument is undefined")
 	}

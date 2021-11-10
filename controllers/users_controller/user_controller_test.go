@@ -16,9 +16,10 @@ func Test_New(t *testing.T) {
 	go servers.Start(injections.Test)
 
 	driver := agouti.ChromeDriver()
+	defer driver.Stop()
 	driver.Start()
 	page, _ := driver.NewPage()
-	defer driver.Stop()
+
 	page.Navigate("http://localhost:8000/users/new")
 	page.FindByID("email").Fill("sample@gmail.com")
 	page.FindByID("password").Fill("password")

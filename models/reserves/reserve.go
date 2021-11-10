@@ -6,10 +6,10 @@ import (
 
 type Reserve struct {
 	gorm.Model
-	UserID    uint
-	PlaceID   uint
-	PlaceName string
-	Date      string
+	UserID      uint
+	ContentID   uint
+	ContentName string
+	Date        string
 }
 
 func (r Reserve) Format_MMDD() string {
