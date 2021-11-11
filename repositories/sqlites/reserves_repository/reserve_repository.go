@@ -22,8 +22,8 @@ func (Repository) Index(user users.User) []reserves.Reserve {
 
 	var table = []field{}
 	db.Table("reserves").
-		Select("reserves.id, places.name, reserves.date").
-		Joins("left join places on reserves.place_id = places.id").
+		Select("reserves.id, contents.name, reserves.date").
+		Joins("left join contents on reserves.content_id = contents.id").
 		Where("user_id = ?", user.ID).
 		Order("date, name").
 		Scan(&table)

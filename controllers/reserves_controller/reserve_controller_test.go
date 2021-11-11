@@ -36,7 +36,7 @@ func Test_Index(t *testing.T) {
 //予約：正常に動作する
 func Test_New(t *testing.T) {
 	go servers.Start(injections.Test)
-	append_place("テスト1")
+	append_content("テスト1")
 
 	driver := agouti.ChromeDriver()
 	driver.Start()
@@ -114,17 +114,17 @@ func append_user(email string, password string) {
 	users_repository.Data = append(users_repository.Data, *user)
 }
 
-//テストデータに予約場所を追加する
-func append_place(name string) {
+//テストデータに予約内容を追加する
+func append_content(name string) {
 	content := contents.Content{Name: name}
 	content.ID = uint(len(reserves_repository.Data) + 1)
 	contents_repository.Data = append(contents_repository.Data, content)
 }
 
-func append_reserve(userId uint, placeID uint, date string, name string) {
+func append_reserve(userId uint, contentID uint, date string, name string) {
 	reserve := reserves.Reserve{
 		UserID:      userId,
-		ContentID:   placeID,
+		ContentID:   contentID,
 		ContentName: name,
 		Date:        date,
 	}
@@ -142,12 +142,14 @@ func assert_url(t *testing.T, page *agouti.Page, url string) {
 	}
 }
 
-func assert_element(t *testing.T, page *agouti.Page, name string, count int) {
-	value, err := page.FindByName(name).Count()
-	if err != nil {
-		t.Fatal(err.Error())
-	}
-	if value == count {
+func assert_element(t *testing.T, page *agouti.Page, name string, expected int) {
+	var elements, _ = page.FindByName(name).Elements()
+	// value, err := len(elements)
+	// if err != nil {
+	// 	t.Fatal(err.Error())
+	// }
+	actual := len(elements)
+	if actual != expected {
 		t.Fatal()
 	}
 }

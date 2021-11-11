@@ -1,10 +1,10 @@
 {{ template "header" .}}
   <form id="form" name="form" action="/reserves/new" method="POST">
     <div class="form-group">
-        <label for="today">予約日</label>
+        <label for="date">予約日</label>
         <p><input type="date" id="date" name="date" class="today"></input></p>
         
-        <label for="place">内容 <span class="badge badge-danger">必須</span></label>
+        <label for="content">内容 <span class="badge badge-danger">必須</span></label>
         <p>
           <select id="content" name="ContentID">
           <option value=""></option>

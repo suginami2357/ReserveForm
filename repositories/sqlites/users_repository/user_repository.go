@@ -19,18 +19,17 @@ func (Repository) Take(src users.User) (*users.User, error) {
 	db := sqlites.Open()
 	defer db.Close()
 
-	if src.ID > 0 {
-		db = db.Where("id = ?", src.ID)
-	} else if src.Email != "" {
-		db = db.Where("email = ?", src.Email)
-	} else if src.Token != nil {
-		db = db.Where("token = ?", src.Token)
-	} else {
-		return nil, errors.New("search parameters is not applicable")
-	}
-
 	var user users.User
-	err := db.Take(&user).Error
+	var err error
+	if src.ID > 0 {
+		err = db.Where("id = ?", src.ID).First(&user).Error
+	} else if src.Email != "" {
+		err = db.Where("email = ?", src.Email).First(&user).Error
+	} else if src.Token != nil {
+		err = db.Where("token = ?", src.Token).First(&user).Error
+	} else {
+		err = errors.New("search parameters is not applicable")
+	}
 	return &user, err
 }
 

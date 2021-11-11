@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', ()=> {
   form.date.value = yyyy + '-' + mm + '-' + dd;
   
   form.button.addEventListener('click', function() { 
-    if(form.PlaceID.value == ""){
+    if(form.ContentID.value == ""){
         alert("内容を選択してください。")
         return;
       }
