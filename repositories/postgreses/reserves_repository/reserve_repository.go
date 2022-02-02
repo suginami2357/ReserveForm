@@ -3,7 +3,7 @@ package reserves_repository
 import (
 	"ReserveForm/models/reserves"
 	"ReserveForm/models/users"
-	"ReserveForm/repositories/sqlites"
+	"ReserveForm/repositories/postgreses"
 
 	"github.com/jinzhu/gorm"
 )
@@ -17,8 +17,7 @@ func (Repository) Index(user users.User) []reserves.Reserve {
 		Name string
 		Date string
 	}
-	db := sqlites.Open()
-	defer db.Close()
+	db := postgreses.Open()
 
 	var table = []field{}
 	db.Table("reserves").
@@ -37,16 +36,12 @@ func (Repository) Index(user users.User) []reserves.Reserve {
 }
 
 func (Repository) Create(reserve reserves.Reserve) {
-	db := sqlites.Open()
-	defer db.Close()
-
+	db := postgreses.Open()
 	db.Create(&reserve)
 }
 
 func (Repository) Delete(reserve reserves.Reserve) {
-	db := sqlites.Open()
-	defer db.Close()
-
+	db := postgreses.Open()
 	db.Where("id = ?", reserve.ID).
 		Where("user_id = ?", reserve.UserID).
 		Unscoped(). //物理削除

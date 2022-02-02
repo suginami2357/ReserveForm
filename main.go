@@ -3,21 +3,14 @@ package main
 import (
 	"ReserveForm/commons/injections"
 	"ReserveForm/commons/servers"
-	// "github.com/jinzhu/gorm"
-	// _ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-	// db, _ := gorm.Open("sqlite3", "data.sqlite3")
-	// defer db.Close()
-
-	// user := users.User{}
-	// db.Where("email = ?", "jinzhu").First(&user)
-
-	// db.AutoMigrate(&users.User{}, &reserves.Reserve{}, &contents.Content{})
-	// db.Create(&contents.Content{Name: "テスト1"})
-	// db.Create(&contents.Content{Name: "テスト2"})
-	// db.Create(&contents.Content{Name: "テスト3"})
-
-	servers.Start(injections.Sqlite)
+	// dsn := "host=localhost user=postgres password=password dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+	// gormDB, _ := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	// gormDB.AutoMigrate(&users.User{}, &reserves.Reserve{}, &contents.Content{})
+	// gormDB.Create(&contents.Content{Name: "テスト1"})
+	// gormDB.Create(&contents.Content{Name: "テスト2"})
+	// gormDB.Create(&contents.Content{Name: "テスト3"})
+	servers.Start(injections.Postgres)
 }

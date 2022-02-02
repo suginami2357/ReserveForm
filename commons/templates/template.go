@@ -25,7 +25,7 @@ func Show_Logout(w http.ResponseWriter, t injections.Type, path string, data int
 func root(t injections.Type) string {
 	var wd, _ = os.Getwd()
 	switch t {
-	case injections.Sqlite:
+	case injections.Postgres:
 		return wd
 	case injections.Test:
 		return wd + "/../../"

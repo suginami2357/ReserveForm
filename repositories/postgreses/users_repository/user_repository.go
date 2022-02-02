@@ -2,23 +2,20 @@ package users_repository
 
 import (
 	"ReserveForm/models/users"
-	"ReserveForm/repositories/sqlites"
+	"ReserveForm/repositories/postgreses"
 	"errors"
 )
 
 type Repository struct{}
 
 func (Repository) Create(user users.User) (*users.User, error) {
-	db := sqlites.Open()
-	defer db.Close()
+	db := postgreses.Open()
 	err := db.Create(&user).Error
 	return &user, err
 }
 
 func (Repository) Take(src users.User) (*users.User, error) {
-	db := sqlites.Open()
-	defer db.Close()
-
+	db := postgreses.Open()
 	var user users.User
 	var err error
 	if src.ID > 0 {
@@ -34,7 +31,6 @@ func (Repository) Take(src users.User) (*users.User, error) {
 }
 
 func (Repository) Update(user users.User) {
-	db := sqlites.Open()
-	defer db.Close()
+	db := postgreses.Open()
 	db.Where("id = ?", user.ID).Save(&user)
 }

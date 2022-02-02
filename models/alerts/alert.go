@@ -1,6 +1,7 @@
 package alerts
 
 type Alert struct {
+	UserID  int
 	Type    string
 	Message string
 }

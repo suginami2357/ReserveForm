@@ -22,7 +22,7 @@ func Start(t injections.Type) {
 	var root string
 	var wd, _ = os.Getwd()
 	switch t {
-	case injections.Sqlite:
+	case injections.Postgres:
 		root = wd
 	case injections.Test:
 		root = wd + "/../../"

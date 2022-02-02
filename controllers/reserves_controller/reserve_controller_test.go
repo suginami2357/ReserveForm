@@ -144,10 +144,6 @@ func assert_url(t *testing.T, page *agouti.Page, url string) {
 
 func assert_element(t *testing.T, page *agouti.Page, name string, expected int) {
 	var elements, _ = page.FindByName(name).Elements()
-	// value, err := len(elements)
-	// if err != nil {
-	// 	t.Fatal(err.Error())
-	// }
 	actual := len(elements)
 	if actual != expected {
 		t.Fatal()
