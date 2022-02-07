@@ -42,5 +42,6 @@ func Start(t injections.Type) {
 	router.HandleFunc("/reserves/new", rc.New)
 	router.HandleFunc("/reserves/{id}/delete", rc.Delete)
 
-	log.Fatal(http.ListenAndServe(":8000", router))
+	log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), nil))
+	// log.Fatal(http.ListenAndServe(":8000", router))
 }
