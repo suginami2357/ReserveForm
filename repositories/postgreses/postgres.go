@@ -18,7 +18,7 @@ func Open() *gorm.DB {
 	//HerokuでDBのセットアップをする場合、 DATABASE_URL という環境変数が設定される
 	url := os.Getenv("DATABASE_URL")
 	connection, _ := pq.ParseURL(url)
-	connection += " sslmode=require"
+	connection += " sslmode=disable"
 	sqlDB, _ := sql.Open("postgres", connection)
 	gormDB, _ := gorm.Open(postgres.New(postgres.Config{
 		Conn: sqlDB,
