@@ -25,7 +25,7 @@ func Open() *gorm.DB {
 	// }), &gorm.Config{})
 
 	connection, _ := pq.ParseURL(os.Getenv("DATABASE_URL"))
-	// connection += " sslmode=disable"
+	connection += " host=postgres user=postgres password=password dbname=postgres sslmode=disable TimeZone=Asia/Shanghai"
 	sqlDB, _ := sql.Open("postgres", connection)
 	gormDB, _ := gorm.Open(postgres.New(postgres.Config{
 		Conn: sqlDB,
