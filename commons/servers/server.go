@@ -42,7 +42,7 @@ func Start(t injections.Type) {
 	router.HandleFunc("/reserves/new", rc.New)
 	router.HandleFunc("/reserves/{id}/delete", rc.Delete)
 
-	if os.Getenv("PORT") == "" {
+	if os.Getenv("DATABASE_URL") == "" {
 		log.Fatal(http.ListenAndServe(":8000", router))
 	} else {
 		log.Fatal(http.ListenAndServe(":"+os.Getenv("PORT"), router))
