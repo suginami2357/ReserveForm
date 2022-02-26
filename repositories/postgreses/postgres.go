@@ -7,13 +7,20 @@ import (
 	"database/sql"
 	"os"
 
+	"github.com/lib/pq"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 //private
 func Open() *gorm.DB {
-	sqlDB, _ := sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	var dsn string
+	if os.Getenv("DATABASE_URL") == "" {
+		dsn = "host=localhost user=postgres password=password dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+	} else {
+		dsn, _ = pq.ParseURL(os.Getenv("DATABASE_URL"))
+	}
+	sqlDB, _ := sql.Open("postgres", dsn)
 	config := postgres.Config{Conn: sqlDB}
 	dialector := postgres.New(config)
 	gormDB, _ := gorm.Open(dialector)
