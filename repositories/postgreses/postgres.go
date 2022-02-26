@@ -4,7 +4,6 @@ import (
 
 	// "github.com/jinzhu/gorm"
 
-	"database/sql"
 	"os"
 
 	"gorm.io/driver/postgres"
@@ -19,10 +18,8 @@ func Open() *gorm.DB {
 	} else {
 		dsn = os.Getenv("DATABASE_URL")
 	}
-	sqlDB, _ := sql.Open("postgres", dsn)
-	config := postgres.Config{Conn: sqlDB}
-	dialector := postgres.New(config)
-	gormDB, _ := gorm.Open(dialector)
+	// sqlDB, _ := sql.Open("postgres", dsn)
+	gormDB, _ := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	// dsn, _ := pq.ParseURL(os.Getenv("DATABASE_URL"))
 	// dsn += "user=postgres dbname=password password=password"
