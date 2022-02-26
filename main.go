@@ -10,10 +10,11 @@ import (
 )
 
 func main() {
-	gormDB := postgreses.Open()
-	gormDB.AutoMigrate(&users.User{}, &reserves.Reserve{}, &contents.Content{})
-	// gormDB.Create(&contents.Content{Name: "テスト1"})
-	// gormDB.Create(&contents.Content{Name: "テスト2"})
-	// gormDB.Create(&contents.Content{Name: "テスト3"})
+	db := postgreses.Open()
+	db.AutoMigrate(&users.User{}, &reserves.Reserve{}, &contents.Content{})
+	db.Create(&contents.Content{Name: "テスト1"})
+	db.Create(&contents.Content{Name: "テスト2"})
+	db.Create(&contents.Content{Name: "テスト3"})
+
 	servers.Start(injections.Postgres)
 }

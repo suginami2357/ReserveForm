@@ -9,8 +9,8 @@ type Repository struct {
 }
 
 func (Repository) Index() []contents.Content {
-	var places []contents.Content
+	var contents []contents.Content
 	db := postgreses.Open()
-	db.Find(&places)
-	return places
+	db.Find(&contents)
+	return contents
 }

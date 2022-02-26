@@ -10,18 +10,7 @@ import (
 
 //private
 func Open() *gorm.DB {
-	// if os.Getenv("DATABASE_URL") == "" {
-	// 	dsn = "host=localhost user=postgres password=password dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai"
-	// } else {
-	// dsn = os.Getenv("DATABASE_URL") + "dbname=d7vogf43k1o4kp password=password port 5432"
-	// }
-
-	// dsn := "host=ec2-18-215-8-186.compute-1.amazonaws.com"
-	// dsn += "dbname=d7vogf43k1o4kp"
-	// dsn += "user=chyfofnwozqyc"
-	// dsn += "port=5432"
-	// dsn += "password=21e7e4cc5818d2a03ea783d235aa3131ef730e0d697196ede51be37fc411d05e"
-	// dsn += "sslmode=disable"
+	// dsn := "host=localhost user=all password=password dbname=all port=5432 sslmode=disable TimeZone=Asia/Shanghai"
 	dsn := "postgres://chyfofnwozqyct:21e7e4cc5818d2a03ea783d235aa3131ef730e0d697196ede51be37fc411d05e@ec2-18-215-8-186.compute-1.amazonaws.com:5432/d7vogf43k1o4kp"
 	gormDB, _ := gorm.Open(postgres.Open(dsn))
 
