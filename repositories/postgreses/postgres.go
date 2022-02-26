@@ -4,22 +4,19 @@ import (
 
 	// "github.com/jinzhu/gorm"
 
+	"database/sql"
 	"os"
 
-	"github.com/jackc/pgx/v4"
-	"github.com/jackc/pgx/v4/stdlib"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
 )
 
 //private
 func Open() *gorm.DB {
-
-	config, _ := pgx.ParseConfig(os.Getenv("DATABASE_URL"))
-	dialector := postgres.New(postgres.Config{Conn: stdlib.OpenDB(*config)})
-	opts := &gorm.Config{Logger: logger.Discard}
-	gormDB, _ := gorm.Open(dialector, opts)
+	sqlDB, _ := sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	config := postgres.Config{Conn: sqlDB}
+	dialector := postgres.New(config)
+	gormDB, _ := gorm.Open(dialector)
 
 	// dsn, _ := pq.ParseURL(os.Getenv("DATABASE_URL"))
 	// dsn += "user=postgres dbname=password password=password"
