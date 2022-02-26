@@ -13,12 +13,11 @@ import (
 //private
 func Open() *gorm.DB {
 	var dsn string
-	// if os.Getenv("DATABASE_URL") == "" {
-	// 	dsn = "host=localhost user=postgres password=password dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai"
-	// } else {
-	// 	dsn = os.Getenv("DATABASE_URL")
-	// }
-	dsn = os.Getenv("DATABASE_URL")
+	if os.Getenv("DATABASE_URL") == "" {
+		dsn = "host=localhost user=postgres password=password dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+	} else {
+		dsn = os.Getenv("DATABASE_URL") + "dbname=password password=password"
+	}
 	gormDB, _ := gorm.Open(postgres.Open(dsn))
 
 	// dsn, _ := pq.ParseURL(os.Getenv("DATABASE_URL"))
